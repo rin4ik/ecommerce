@@ -18,10 +18,15 @@ class Product extends Model implements HasMedia
     {
         return money($this->price);
     }
-    public function registerMediaConversions(Media $media = null) : void
+    public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb200x200')
             ->fit(Manipulations::FIT_CROP, 200, 200);
+    }
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('default')
+            ->useFallbackUrl(url('/storage/no-product-image.png'));
     }
     public function variations()
     {
